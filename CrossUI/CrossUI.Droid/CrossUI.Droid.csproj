@@ -12,7 +12,7 @@
     <RootNamespace>CrossUI.Droid</RootNamespace>
     <AssemblyName>CrossUI.Droid</AssemblyName>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkVersion>v1.6</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v2.2</TargetFrameworkVersion>
     <AndroidSupportedAbis>armeabi%3barmeabi-v7a%3bx86</AndroidSupportedAbis>
     <AndroidStoreUncompressedFileExtensions />
     <MandroidI18n />
