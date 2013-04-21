@@ -17,8 +17,7 @@
     <DebugType>full</DebugType>
     <Optimize>False</Optimize>
     <OutputPath>..\..\bin\Debug\Mvx\Touch\</OutputPath>
-    <DefineConstants Condition="'$(OS)' != 'Windows_NT'">DEBUG;MONOTOUCH</DefineConstants>
-    <DefineConstants Condition="'$(OS)' == 'Windows_NT'">DEBUG;MONOTOUCH;HACK_DO_NOT_FORWARD_ICOMMAND</DefineConstants>
+    <DefineConstants>DEBUG;MONOTOUCH</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>False</ConsolePause>
@@ -35,6 +34,15 @@
     <WarningLevel>4</WarningLevel>
     <ConsolePause>False</ConsolePause>
     <DefineConstants>MONOTOUCH</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(OS)' == 'Windows_NT'">
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <DelaySign>true</DelaySign>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>..\Signing\system_windows.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="monotouch">
@@ -56,7 +64,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="System.ComponentModel\DataErrorsChangedEventArgs.cs" />
     <Compile Include="System.ComponentModel\INotifyDataErrorInfo.cs" />
-    <Compile Include="System.Windows.Input\ICommand.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Signing\system_windows.snk">
+      <Link>system_windows.snk</Link>
+    </None>
   </ItemGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
