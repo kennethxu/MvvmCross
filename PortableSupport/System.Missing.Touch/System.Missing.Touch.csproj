@@ -25,7 +25,7 @@
     <MtouchDebug>True</MtouchDebug>
     <MtouchProfiling>True</MtouchProfiling>
     <MtouchLink>None</MtouchLink>
-    <DocumentationFile>..\bin\Touch\Debug\System.Missing.XML</DocumentationFile>
+    <DocumentationFile>..\bin\Debug\Touch\System.Missing.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <NoStdLib>True</NoStdLib>
@@ -37,7 +37,7 @@
     <ConsolePause>False</ConsolePause>
     <DefineConstants>
     </DefineConstants>
-    <DocumentationFile>..\bin\Touch\Release\System.Missing.XML</DocumentationFile>
+    <DocumentationFile>..\bin\Release\Touch\System.Missing.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(OS)' == 'Windows_NT'">
     <SignAssembly>true</SignAssembly>
