@@ -5,11 +5,12 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.0</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{9499E72B-FD7C-4A9B-AB6C-0F9B7359257C}</ProjectGuid>
+    <ProjectGuid>{CD2F8E6A-C890-4FE5-91B6-EDFDC09C90EB}</ProjectGuid>
     <ProjectTypeGuids>{6BC8ED88-2882-458C-8E55-DFD12B67127B};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
-    <RootNamespace>System.Windows.Touch</RootNamespace>
-    <AssemblyName>System.Windows</AssemblyName>
+    <RootNamespace>System</RootNamespace>
+    <AssemblyName>System.Missing</AssemblyName>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <NoStdLib>True</NoStdLib>
@@ -17,13 +18,14 @@
     <DebugType>full</DebugType>
     <Optimize>False</Optimize>
     <OutputPath>..\bin\Debug\Touch\</OutputPath>
-    <DefineConstants>DEBUG;MONOTOUCH</DefineConstants>
+    <DefineConstants>DEBUG</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>False</ConsolePause>
     <MtouchDebug>True</MtouchDebug>
     <MtouchProfiling>True</MtouchProfiling>
     <MtouchLink>None</MtouchLink>
+    <DocumentationFile>..\bin\Touch\Debug\System.Missing.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <NoStdLib>True</NoStdLib>
@@ -33,7 +35,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>False</ConsolePause>
-    <DefineConstants>MONOTOUCH</DefineConstants>
+    <DefineConstants>
+    </DefineConstants>
+    <DocumentationFile>..\bin\Touch\Release\System.Missing.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(OS)' == 'Windows_NT'">
     <SignAssembly>true</SignAssembly>
@@ -60,14 +64,13 @@
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets" />
   <ItemGroup>
-    <Compile Include="Forwarding.cs" />
+    <Compile Include="..\System.Windows\System.ComponentModel\DataErrorsChangedEventArgs.cs">
+      <Link>System.ComponentModel\DataErrorsChangedEventArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\System.Windows\System.ComponentModel\INotifyDataErrorInfo.cs">
+      <Link>System.ComponentModel\INotifyDataErrorInfo.cs</Link>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\System.Missing.Touch\System.Missing.Touch.csproj">
-      <Project>{CD2F8E6A-C890-4FE5-91B6-EDFDC09C90EB}</Project>
-      <Name>System.Missing.Touch</Name>
-    </ProjectReference>
   </ItemGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

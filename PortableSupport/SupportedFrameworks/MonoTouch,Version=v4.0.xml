@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Framework DisplayName="MonoTouch"
+Identifier="MonoTouch"
+Profile="*"
+MinimumVersion="4.0"
+MaximumVersion="4.0" />

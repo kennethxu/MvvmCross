@@ -21,23 +21,25 @@
     <DebugSymbols>True</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>False</Optimize>
-    <OutputPath>..\..\bin\Debug\Mvx\Droid\</OutputPath>
+    <OutputPath>..\bin\Debug\Droid\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <DelaySign>true</DelaySign>
     <AndroidLinkMode>None</AndroidLinkMode>
+    <DocumentationFile>..\bin\Debug\Droid\System.Windows.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>True</Optimize>
-    <OutputPath>..\..\bin\Release\Mvx\Droid\</OutputPath>
+    <OutputPath>..\bin\Release\Droid\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <DelaySign>true</DelaySign>
     <AndroidLinkMode>SdkOnly</AndroidLinkMode>
     <AndroidUseSharedRuntime>False</AndroidUseSharedRuntime>
+    <DocumentationFile>..\bin\Release\Droid\System.Windows.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Mono.Android" />
@@ -51,7 +53,6 @@
     <Compile Include="Forwarding.cs" />
     <Compile Include="System.ComponentModel\DataErrorsChangedEventArgs.cs" />
     <Compile Include="System.ComponentModel\INotifyDataErrorInfo.cs" />
-    <Compile Include="System.Windows.Input\ICommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
