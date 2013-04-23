@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>System.Windows</name>
+    </assembly>
+    <members>
+        <member name="T:System.ComponentModel.DataErrorsChangedEventArgs">
+            <summary>
+            Provides data for the <see cref="E:System.ComponentModel.INotifyDataErrorInfo.ErrorsChanged"/> event.
+            </summary>
+        </member>
+        <member name="M:System.ComponentModel.DataErrorsChangedEventArgs.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the DataErrorsChangedEventArgs class. 
+            </summary>
+            <param name="propertyName">
+            The name of the property for which the errors changed, or <code>null</code> or <see cref="F:System.String.Empty">Empty</see> 
+            for entity-level errors.
+            </param>
+        </member>
+        <member name="P:System.ComponentModel.DataErrorsChangedEventArgs.PropertyName">
+            <summary>
+            Gets the name of the property that has an error.
+            </summary>
+            <value>
+            The name of the property for which the errors changed, or <code>null</code> or <see cref="F:System.String.Empty">Empty</see> 
+            for entity-level errors.
+            </value>
+        </member>
+        <member name="T:System.ComponentModel.INotifyDataErrorInfo">
+            <summary>
+            Defines members that data entity classes can implement to provide custom synchronous and asynchronous validation support.
+            </summary>
+            <remarks>
+            This interface enables data entity classes to implement custom validation rules and expose validation results 
+            asynchronously. This interface also supports custom error objects, multiple errors per property, cross-property errors, 
+            and entity-level errors. Cross-property errors are errors that affect multiple properties. You can associate these errors 
+            with one or all of the affected properties, or you can treat them as entity-level errors. Entity-level errors are errors 
+            that either affect multiple properties or affect the entire entity without affecting a particular property.
+            </remarks>
+        </member>
+        <member name="M:System.ComponentModel.INotifyDataErrorInfo.GetErrors(System.String)">
+            <summary>
+            Gets the validation errors for a specified property or for the entire entity.
+            </summary>
+            <param name="propertyName">
+            The name of the property for which the errors changed, or <code>null</code> or <see cref="F:System.String.Empty">Empty</see> 
+            for entity-level errors.
+            </param>
+            <returns>The validation errors for the property or entity.</returns>
+        </member>
+        <member name="E:System.ComponentModel.INotifyDataErrorInfo.ErrorsChanged">
+            <summary>
+            Occurs when the validation errors have changed for a property or for the entire entity.
+            </summary>
+            <remarks>
+            The implementing class should raise this event on the user interface thread whenever the GetErrors return value changes, 
+            even if the return value implements <see cref="T:System.Collections.Specialized.INotifyCollectionChanged"/>.
+            </remarks>
+        </member>
+        <member name="P:System.ComponentModel.INotifyDataErrorInfo.HasErrors">
+            <summary>
+            Gets a value that indicates whether the entity has validation errors.
+            </summary>
+            <remarks>
+            This property returns false if there are no known entity-level or property-level validation errors for the entity at 
+            the time it is accessed. However, some validation rules may still be running asynchronously as described for the 
+            <see cref="M:System.ComponentModel.INotifyDataErrorInfo.GetErrors(System.String)"/> method. 
+            </remarks>
+            <value><code>true</code> if the entity currently has validation errors; otherwise, <code>false</code>.</value>
+        </member>
+    </members>
+</doc>

@@ -359,10 +359,6 @@
       <Project>{4E79D6B0-ADB9-4470-AB5D-CABFBE73F97D}</Project>
       <Name>Cirrious.MvvmCross.Plugins.WebBrowser.Touch</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\PortableSupport\System.Windows.Touch\System.Windows.Touch.csproj">
-      <Project>{9499E72B-FD7C-4A9B-AB6C-0F9B7359257C}</Project>
-      <Name>System.Windows.Touch</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\CrossCore\Cirrious.CrossCore.Touch\Cirrious.CrossCore.Touch.csproj">
       <Project>{BBBCD850-E7CB-4B6C-86D9-CE01F2B1C81C}</Project>
       <Name>Cirrious.CrossCore.Touch</Name>
@@ -432,7 +428,5 @@
     <InterfaceDefinition Include="Cells\SessionCell.xib" />
     <InterfaceDefinition Include="Cells\SeparatorCell.xib" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Bootstrap\" />
-  </ItemGroup>
+  <ItemGroup />
 </Project>
