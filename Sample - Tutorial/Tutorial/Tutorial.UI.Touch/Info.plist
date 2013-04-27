@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>CFBundleDisplayName</key>
-	<string>MvvmCross</string>
+	<string>MvvmCross Tutorial</string>
 	<key>CFBundleIdentifier</key>
 	<string>com.cirrious.mvvmcross.tutorial</string>
 	<key>CFBundleVersion</key>
@@ -20,5 +20,9 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSMainNibFile</key>
+	<string></string>
+	<key>MKDirectionsApplicationSupportedModes</key>
+	<array/>
 </dict>
 </plist>
