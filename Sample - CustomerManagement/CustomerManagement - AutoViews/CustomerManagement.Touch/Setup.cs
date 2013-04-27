@@ -46,9 +46,9 @@ namespace CustomerManagement.Touch
         {
             base.InitializeLastChance();
             Cirrious.MvvmCross.Plugins.File.PluginLoader.Instance.EnsureLoaded();
-            Cirrious.MvvmCross.Plugins.File.PluginLoader.Instance.EnsureLoaded();
             Cirrious.MvvmCross.Plugins.Json.PluginLoader.Instance.EnsureLoaded();
-           
+			Cirrious.MvvmCross.Plugins.DownloadCache.PluginLoader.Instance.EnsureLoaded();
+
             Mvx.RegisterSingleton<IViewModelCloser>(_presenter);
             SetupAutoViews();
         }
