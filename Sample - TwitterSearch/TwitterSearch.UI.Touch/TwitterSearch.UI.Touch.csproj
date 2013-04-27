@@ -89,7 +89,7 @@
     <Reference Include="System.Core" />
     <Reference Include="mscorlib" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Net.Touch">
+    <Reference Include="System.Net">
       <HintPath>..\..\bin\Debug\Mvx\Touch\System.Net.dll</HintPath>
     </Reference>
   </ItemGroup>
