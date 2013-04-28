@@ -20,7 +20,7 @@
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 	</array>
 	<key>CFBundleIdentifier</key>
-	<string>com.cirrious.mvvmcross.conference</string>
+	<string>com.cirrious.mvvmcross.bestsellers</string>
 	<key>CFBundleVersion</key>
 	<string></string>
 	<key>NSMainNibFile</key>

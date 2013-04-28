@@ -19,7 +19,7 @@
 	<key>CFBundleVersion</key>
 	<string></string>
 	<key>MinimumOSVersion</key>
-	<string></string>
+	<string>3.2</string>
 	<key>NSMainNibFile</key>
 	<string></string>
 	<key>MKDirectionsApplicationSupportedModes</key>
