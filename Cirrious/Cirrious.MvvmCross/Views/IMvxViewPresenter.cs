@@ -1,16 +1,17 @@
-// IMvxValueConverterRegistry.cs
+// IMvxViewPresenter.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Converters;
+using Cirrious.MvvmCross.ViewModels;
 
-namespace Cirrious.MvvmCross.Binding.Binders
+namespace Cirrious.MvvmCross.Views
 {
-    public interface IMvxValueConverterRegistry
+    public interface IMvxViewPresenter
     {
-        void AddOrOverwrite(string converterName, IMvxValueConverter converter);
+        void Show(MvxViewModelRequest request);
+        void ChangePresentation(MvxPresentationHint hint);
     }
 }

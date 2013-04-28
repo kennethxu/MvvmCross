@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2010
+# Visual Studio 2012
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MvvmCross", "MvvmCross", "{91B3E1F2-BE90-4928-98D1-AF2748CBCB0A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Droid", "Droid", "{19B48F02-B63D-4DD2-BE69-271B258FC8E2}"
@@ -273,7 +273,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Network", "Network", "{79156BB2-5DA0-4D83-B6BA-FF4CE3BDD157}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Network", "Plugins\Cirrious\Network\Cirrious.MvvmCross.Plugins.Network\Cirrious.MvvmCross.Plugins.Network.csproj", "{8507CAFE-6A92-4267-8EBF-6FC8365FB48D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Network", "plugins\Cirrious\Network\Cirrious.MvvmCross.Plugins.Network\Cirrious.MvvmCross.Plugins.Network.csproj", "{8507CAFE-6A92-4267-8EBF-6FC8365FB48D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Network.Touch", "Plugins\Cirrious\Network\Cirrious.MvvmCross.Plugins.Network.Touch\Cirrious.MvvmCross.Plugins.Network.Touch.csproj", "{02C04423-CC72-4745-920A-80B36EB67ADB}"
 EndProject
@@ -406,6 +406,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.CrossCore.Test", "CrossCore\Test\Cirrious.CrossCore.Test\Cirrious.CrossCore.Test.csproj", "{666EB95D-7CD8-48B6-A2F8-395DECC84140}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.CrossCore.Droid", "CrossCore\Cirrious.CrossCore.Droid\Cirrious.CrossCore.Droid.csproj", "{CAF8935F-56FE-4485-9D34-4A38FE79F6C9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cirrious.MvvmCross.Plugins.Email.Wpf", "Plugins\Cirrious\Email\Cirrious.MvvmCross.Plugins.Email.Wpf\Cirrious.MvvmCross.Plugins.Email.Wpf.csproj", "{46322A44-23E0-4969-8D08-D59AC92C9A24}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -3683,6 +3685,24 @@ Global
 		{CAF8935F-56FE-4485-9D34-4A38FE79F6C9}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{CAF8935F-56FE-4485-9D34-4A38FE79F6C9}.Release|x64.ActiveCfg = Release|Any CPU
 		{CAF8935F-56FE-4485-9D34-4A38FE79F6C9}.Release|x86.ActiveCfg = Release|Any CPU
+		{46322A44-23E0-4969-8D08-D59AC92C9A24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46322A44-23E0-4969-8D08-D59AC92C9A24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46322A44-23E0-4969-8D08-D59AC92C9A24}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{46322A44-23E0-4969-8D08-D59AC92C9A24}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{46322A44-23E0-4969-8D08-D59AC92C9A24}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{46322A44-23E0-4969-8D08-D59AC92C9A24}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{46322A44-23E0-4969-8D08-D59AC92C9A24}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{46322A44-23E0-4969-8D08-D59AC92C9A24}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{46322A44-23E0-4969-8D08-D59AC92C9A24}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{46322A44-23E0-4969-8D08-D59AC92C9A24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46322A44-23E0-4969-8D08-D59AC92C9A24}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46322A44-23E0-4969-8D08-D59AC92C9A24}.Release|ARM.ActiveCfg = Release|Any CPU
+		{46322A44-23E0-4969-8D08-D59AC92C9A24}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{46322A44-23E0-4969-8D08-D59AC92C9A24}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{46322A44-23E0-4969-8D08-D59AC92C9A24}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{46322A44-23E0-4969-8D08-D59AC92C9A24}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{46322A44-23E0-4969-8D08-D59AC92C9A24}.Release|x64.ActiveCfg = Release|Any CPU
+		{46322A44-23E0-4969-8D08-D59AC92C9A24}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -3746,6 +3766,7 @@ Global
 		{9F3BF260-B186-4F60-8C53-D2166A61E617} = {1048EFD2-EE2E-4791-B3BC-C309CA95BABE}
 		{B13DDC77-3A1A-4A20-AFD7-025DD2907457} = {1048EFD2-EE2E-4791-B3BC-C309CA95BABE}
 		{834698FB-7AD3-4E65-BF16-0C0C2E932FC4} = {1048EFD2-EE2E-4791-B3BC-C309CA95BABE}
+		{46322A44-23E0-4969-8D08-D59AC92C9A24} = {1048EFD2-EE2E-4791-B3BC-C309CA95BABE}
 		{71D719FA-95B0-4A05-B064-AB8D0B7085DF} = {25C0C3FF-9F55-4460-AC59-1188986412B8}
 		{45C34474-D86F-4AC6-BBBE-22DAA52605F0} = {344AE54B-8825-4783-8DDC-87CCF3F8FC3C}
 		{5C48D946-D083-4271-819E-DBFA2016853B} = {344AE54B-8825-4783-8DDC-87CCF3F8FC3C}

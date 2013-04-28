@@ -83,6 +83,11 @@ namespace Cirrious.MvvmCross.Plugins.ReflectionEx.Droid
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
 			}
 			
+			static String()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
 			private String()
 			{
 			}
