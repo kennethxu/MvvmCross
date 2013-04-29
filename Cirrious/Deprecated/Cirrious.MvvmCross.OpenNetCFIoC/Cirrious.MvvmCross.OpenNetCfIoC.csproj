@@ -1,6 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
+    <PortableProfile Condition="'$(OS)' == 'Windows_NT'">Profile104</PortableProfile>
+    <PortableProfile Condition="'$(OS)' != 'Windows_NT'">Profile1</PortableProfile>
+  </PropertyGroup>	
+  <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{F0D1E53A-4188-4319-8E71-936AE55763BD}</ProjectGuid>
@@ -9,7 +13,7 @@
     <RootNamespace>Cirrious.MvvmCross.OpenNetCfIoC</RootNamespace>
     <AssemblyName>Cirrious.MvvmCross.OpenNetCfIoC</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Profile104</TargetFrameworkProfile>
+    <TargetFrameworkProfile>$(PortableProfile)</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <ProductVersion>10.0.0</ProductVersion>
@@ -19,7 +23,7 @@
     <DebugSymbols>True</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>False</Optimize>
-    <OutputPath>..\..\bin\Debug\Mvx\Portable\</OutputPath>
+    <OutputPath>..\..\bin\Debug\Mvx\Portable\$(PortableProfile)</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -27,7 +31,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>True</Optimize>
-    <OutputPath>..\..\bin\Release\Mvx\Portable\</OutputPath>
+    <OutputPath>..\..\bin\Release\Mvx\Portable\$(PortableProfile)</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
