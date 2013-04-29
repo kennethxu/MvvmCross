@@ -29,8 +29,9 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <DebugType>none</DebugType>
+    <DebugType>pdbonly</DebugType>
     <WarningLevel>4</WarningLevel>
+    <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="..\Cirrious.MvvmCross.Plugins.ReflectionEx\HackShare\MvxReflectionEx.cs">
