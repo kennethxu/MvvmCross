@@ -1,0 +1,26 @@
+#!/bin/sh
+#
+# This script is to fix the Portable Class Library project so that it can be compiled in both Xamarin and Visual Studio.
+# To use script, run only once against the probject file. e.g.:
+#
+#   sh fixPortable the/path/to/my.csproj
+#
+
+PREFIX_PATH=`grep '<Output.*Debug.*Portable' "$1" | sed -e 's/^[ 	]*<Output[^>]*>//' -e 's/bin.*$//'`
+
+ed -s "$1" <<EOF!
+/<TargetFrameworkProfile>/c
+    <TargetFrameworkProfile Condition="'\$(OS)' != 'Windows_NT'">Profile1</TargetFrameworkProfile>
+    <TargetFrameworkProfile Condition="'\$(OS)' == 'Windows_NT'">Profile104</TargetFrameworkProfile>
+.
+/<OutputPath.*Debug/c
+    <OutputPath Condition="'\$(OS)' != 'Windows_NT'">${PREFIX_PATH}bin\\Debug\\Mvx\\Portable\\Profile1</OutputPath>
+    <OutputPath Condition="'\$(OS)' == 'Windows_NT'">${PREFIX_PATH}bin\\Debug\\Mvx\\Portable\\Profile104</OutputPath>
+.
+/<OutputPath.*Release/c
+    <OutputPath Condition="'\$(OS)' != 'Windows_NT'">${PREFIX_PATH}bin\\Release\\Mvx\\Portable\\Profile1</OutputPath>
+    <OutputPath Condition="'\$(OS)' == 'Windows_NT'">${PREFIX_PATH}bin\\Release\\Mvx\\Portable\\Profile104</OutputPath>
+.
+w
+Q
+EOF!
