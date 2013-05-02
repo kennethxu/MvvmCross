@@ -23,7 +23,7 @@
     <DebugType>full</DebugType>
     <Optimize>False</Optimize>
     <OutputPath Condition="'$(OS)' != 'Windows_NT'">..\..\..\..\bin\Debug\Mvx\Portable\Profile1</OutputPath>
-    <OutputPath Condition="'$(OS)' == 'Windows_NT'">..\..\..\..\bin\Debug\Mvx\Portable\Profile104</OutputPath>
+    <OutputPath Condition="'$(OS)' == 'Windows_NT'">..\..\..\..\bin\Debug\Mvx\Portable</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -32,7 +32,7 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>True</Optimize>
     <OutputPath Condition="'$(OS)' != 'Windows_NT'">..\..\..\..\bin\Release\Mvx\Portable\Profile1</OutputPath>
-    <OutputPath Condition="'$(OS)' == 'Windows_NT'">..\..\..\..\bin\Release\Mvx\Portable\Profile104</OutputPath>
+    <OutputPath Condition="'$(OS)' == 'Windows_NT'">..\..\..\..\bin\Release\Mvx\Portable</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
