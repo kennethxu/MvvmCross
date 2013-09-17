@@ -14,12 +14,12 @@ ed -s "$1" <<EOF!
     <TargetFrameworkProfile Condition="'\$(OS)' == 'Windows_NT'">Profile104</TargetFrameworkProfile>
 .
 /<OutputPath.*Debug/c
-    <OutputPath Condition="'\$(OS)' != 'Windows_NT'">${PREFIX_PATH}bin\\Debug\\Mvx\\Portable\\Profile1</OutputPath>
-    <OutputPath Condition="'\$(OS)' == 'Windows_NT'">${PREFIX_PATH}bin\\Debug\\Mvx\\Portable\\Profile104</OutputPath>
+    <OutputPath Condition="'\$(OS)' != 'Windows_NT'">${PREFIX_PATH}bin\\Debug\\Mvx\\Portable\\Profile1\\</OutputPath>
+    <OutputPath Condition="'\$(OS)' == 'Windows_NT'">${PREFIX_PATH}bin\\Debug\\Mvx\\Portable\\</OutputPath>
 .
 /<OutputPath.*Release/c
-    <OutputPath Condition="'\$(OS)' != 'Windows_NT'">${PREFIX_PATH}bin\\Release\\Mvx\\Portable\\Profile1</OutputPath>
-    <OutputPath Condition="'\$(OS)' == 'Windows_NT'">${PREFIX_PATH}bin\\Release\\Mvx\\Portable\\Profile104</OutputPath>
+    <OutputPath Condition="'\$(OS)' != 'Windows_NT'">${PREFIX_PATH}bin\\Release\\Mvx\\Portable\\Profile1\\</OutputPath>
+    <OutputPath Condition="'\$(OS)' == 'Windows_NT'">${PREFIX_PATH}bin\\Release\\Mvx\\Portable\\</OutputPath>
 .
 w
 Q
