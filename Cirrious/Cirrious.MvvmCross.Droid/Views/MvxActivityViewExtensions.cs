@@ -67,16 +67,9 @@ namespace Cirrious.MvvmCross.Droid.Views
 
         public static void OnViewNewIntent(this IMvxAndroidView androidView)
         {
-            throw new MvxException("Sorry - we don't currently support OnNewIntent in MvvmCross-Android");
-            /*
-            androidView.EnsureSetupInitialized();
-            androidView.OnLifetimeEvent((listener, activity) => listener.OnViewNewIntent(activity));
-            
-            var view = androidView as IMvxView;
-            MvxTrace.Warning(
-                           "OnViewNewIntent isn't well understood or tested inside MvvmCross - it's not really a cross-platform concept.");
-            view.OnViewNewIntent(() => { return androidView.LoadViewModel(null); });
-             */
+#warning Should this be an exception here as we do not respond to the new intent message
+            Mvx.Warning("OnViewNewIntent called - but this is not fully handled wihtin MvvmCross currently. Check https://github.com/slodge/MvvmCross/pull/294 for more info");
+            //throw new MvxException("Sorry - we don't currently support OnNewIntent in MvvmCross-Android");
         }
 
         public static void OnViewDestroy(this IMvxAndroidView androidView)
@@ -137,9 +130,8 @@ namespace Cirrious.MvvmCross.Droid.Views
             if (viewModelType == null
                 || viewModelType == typeof (IMvxViewModel))
             {
-                MvxTrace.Warning("No ViewModel class specified for {0} - returning null from LoadViewModel",
+                MvxTrace.Trace("No ViewModel class specified for {0} in LoadViewModel",
                                androidView.GetType().Name);
-                return null;
             }
 
             var translatorService = Mvx.Resolve<IMvxAndroidViewModelLoader>();
@@ -157,8 +149,8 @@ namespace Cirrious.MvvmCross.Droid.Views
             }
 
             var activity = androidView.ToActivity();
-            var setup = MvxAndroidSetupSingleton.GetOrCreateSetup(activity.ApplicationContext);
-            setup.EnsureInitialized(androidView.GetType());
+            var setupSingleton = MvxAndroidSetupSingleton.EnsureSingletonAvailable(activity.ApplicationContext);
+            setupSingleton.EnsureInitialized();
         }
     }
 }

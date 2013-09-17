@@ -5,7 +5,6 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.MvvmCross.Platform;
 using Cirrious.MvvmCross.Test.Core;
 using Cirrious.MvvmCross.Test.Mocks.TestViewModels;
 using Cirrious.MvvmCross.Test.Mocks.TestViews;
@@ -23,7 +22,8 @@ namespace Cirrious.MvvmCross.Test.Platform
             ClearAll();
 
             var assembly = this.GetType().Assembly;
-            var viewModelNameLookup = new MvxViewModelByNameLookup(new[] {assembly});
+            var viewModelNameLookup = new MvxViewModelByNameLookup();
+            viewModelNameLookup.AddAll(assembly);
             var test = new MvxViewModelViewTypeFinder(viewModelNameLookup);
 
             // test for positives

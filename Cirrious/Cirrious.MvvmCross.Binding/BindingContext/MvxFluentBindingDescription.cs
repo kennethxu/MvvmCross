@@ -8,6 +8,8 @@
 using System;
 using System.Linq.Expressions;
 using Cirrious.CrossCore.Converters;
+using Cirrious.MvvmCross.Binding.Bindings;
+using Cirrious.MvvmCross.Binding.ValueConverters;
 
 namespace Cirrious.MvvmCross.Binding.BindingContext
 {
@@ -60,34 +62,59 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
 
         public MvxFluentBindingDescription<TTarget, TSource> To(string sourcePropertyPath)
         {
-            BindingDescription.SourcePropertyPath = sourcePropertyPath;
+            SetFreeTextPropertyPath(sourcePropertyPath);
             return this;
         }
 
         public MvxFluentBindingDescription<TTarget, TSource> To(Expression<Func<TSource, object>> sourceProperty)
         {
             var sourcePropertyPath = SourcePropertyPath(sourceProperty);
-            return To(sourcePropertyPath);
+            SetKnownTextPropertyPath(sourcePropertyPath);
+            return this;
+        }
+
+        public MvxFluentBindingDescription<TTarget, TSource> CommandParameter(object parameter)
+        {
+            return WithConversion(new MvxCommandParameterValueConverter(), parameter);
         }
 
         public MvxFluentBindingDescription<TTarget, TSource> WithConversion(string converterName,
-                                                                   object converterParameter = null)
+                                                                            object converterParameter = null)
         {
             var converter = ValueConverterFromName(converterName);
             return WithConversion(converter, converterParameter);
         }
 
         public MvxFluentBindingDescription<TTarget, TSource> WithConversion(IMvxValueConverter converter,
-                                                                   object converterParameter)
+                                                                            object converterParameter)
         {
-            BindingDescription.Converter = converter;
-            BindingDescription.ConverterParameter = converterParameter;
+            SourceStepDescription.Converter = converter;
+            SourceStepDescription.ConverterParameter = converterParameter;
             return this;
         }
 
         public MvxFluentBindingDescription<TTarget, TSource> WithFallback(object fallback)
         {
-            BindingDescription.FallbackValue = fallback;
+            SourceStepDescription.FallbackValue = fallback;
+            return this;
+        }
+
+        public MvxFluentBindingDescription<TTarget, TSource> Described(string bindingDescription)
+        {
+            var newBindingDescription =
+                MvxBindingSingletonCache.Instance.BindingDescriptionParser.ParseSingle(bindingDescription);
+            return Described(newBindingDescription);
+        }
+
+        public MvxFluentBindingDescription<TTarget, TSource> Described(MvxBindingDescription description)
+        {
+            Overwrite(description ?? new MvxBindingDescription());
+            return this;
+        }
+
+        public MvxFluentBindingDescription<TTarget, TSource> WithClearBindingKey(object clearBindingKey)
+        {
+            ClearBindingKey = clearBindingKey;
             return this;
         }
     }
@@ -141,14 +168,20 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
 
         public MvxFluentBindingDescription<TTarget> To(string sourcePropertyPath)
         {
-            BindingDescription.SourcePropertyPath = sourcePropertyPath;
+            SetFreeTextPropertyPath(sourcePropertyPath);
             return this;
         }
 
         public MvxFluentBindingDescription<TTarget> To<TSource>(Expression<Func<TSource, object>> sourceProperty)
         {
             var sourcePropertyPath = SourcePropertyPath(sourceProperty);
-            return To(sourcePropertyPath);
+            SetKnownTextPropertyPath(sourcePropertyPath);
+            return this;
+        }
+
+        public MvxFluentBindingDescription<TTarget> CommandParameter(object parameter)
+        {
+            return WithConversion(new MvxCommandParameterValueConverter(), parameter);
         }
 
         public MvxFluentBindingDescription<TTarget> WithConversion(string converterName,
@@ -161,14 +194,33 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
         public MvxFluentBindingDescription<TTarget> WithConversion(IMvxValueConverter converter,
                                                                    object converterParameter)
         {
-            BindingDescription.Converter = converter;
-            BindingDescription.ConverterParameter = converterParameter;
+            SourceStepDescription.Converter = converter;
+            SourceStepDescription.ConverterParameter = converterParameter;
             return this;
         }
 
         public MvxFluentBindingDescription<TTarget> WithFallback(object fallback)
         {
-            BindingDescription.FallbackValue = fallback;
+            SourceStepDescription.FallbackValue = fallback;
+            return this;
+        }
+
+        public MvxFluentBindingDescription<TTarget> Described(string bindingDescription)
+        {
+            var newBindingDescription =
+                MvxBindingSingletonCache.Instance.BindingDescriptionParser.ParseSingle(bindingDescription);
+            return Described(newBindingDescription);
+        }
+
+        public MvxFluentBindingDescription<TTarget> Described(MvxBindingDescription description)
+        {
+            Overwrite(description ?? new MvxBindingDescription());
+            return this;
+        }
+
+        public MvxFluentBindingDescription<TTarget> WithClearBindingKey(object clearBindingKey)
+        {
+            ClearBindingKey = clearBindingKey;
             return this;
         }
     }

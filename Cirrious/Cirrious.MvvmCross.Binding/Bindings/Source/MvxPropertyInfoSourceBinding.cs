@@ -10,7 +10,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.Binding.ExtensionMethods;
+using Cirrious.CrossCore.WeakSubscription;
 
 namespace Cirrious.MvvmCross.Binding.Bindings.Source
 {
@@ -20,10 +20,11 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source
         private readonly string _propertyName;
         private IDisposable _subscription;
 
-        protected MvxPropertyInfoSourceBinding(object source, string propertyName)
+        protected MvxPropertyInfoSourceBinding(object source, PropertyInfo propertyInfo)
             : base(source)
         {
-            _propertyName = propertyName;
+            _propertyInfo = propertyInfo;
+            _propertyName = propertyInfo.Name;
 
             if (Source == null)
             {
@@ -31,18 +32,8 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source
                     // this is not a Warning - as actually using a NULL source is a fairly common occurrence!
                     MvxTraceLevel.Diagnostic,
                     "Unable to bind to source as it's null"
-                    , propertyName);
+                    , _propertyName);
                 return;
-            }
-
-            _propertyInfo = source.GetType().GetProperty(propertyName);
-            if (_propertyInfo == null)
-            {
-                MvxBindingTrace.Trace(
-                    MvxTraceLevel.Warning,
-                    "Unable to bind: source property source not found {0} on {1}"
-                    , propertyName,
-                    source.GetType().Name);
             }
 
             var sourceNotify = Source as INotifyPropertyChanged;
@@ -92,9 +83,13 @@ namespace Cirrious.MvvmCross.Binding.Bindings.Source
             }
         }
 
-        private void SourcePropertyChanged(object sender, PropertyChangedEventArgs e)
+        // Note - this is public because we use it in weak referenced situations
+        public void SourcePropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == PropertyName)
+            // we test for null or empty here - this means all properties have changed
+            // - fix for https://github.com/slodge/MvvmCross/issues/280 
+            if (string.IsNullOrEmpty(e.PropertyName)
+                || e.PropertyName == PropertyNameForChangedEvent)
                 OnBoundPropertyChanged();
         }
 

@@ -235,6 +235,20 @@ namespace Cirrious.CrossCore.Parse
 
         protected object ReadValue()
         {
+            object toReturn;
+            if (!TryReadValue(AllowNonQuotedText.Allow, out toReturn))
+                throw new MvxException("Unable to read value");
+            return toReturn;
+        }
+
+        public enum AllowNonQuotedText
+        {
+            Allow,
+            DoNotAllow
+        }
+
+        protected bool TryReadValue(AllowNonQuotedText allowNonQuotedText, out object value)
+        {
             SkipWhitespace();
 
             if (IsComplete)
@@ -244,19 +258,38 @@ namespace Cirrious.CrossCore.Parse
 
             var currentChar = CurrentChar;
             if (currentChar == '\'' || currentChar == '\"')
-                return ReadQuotedString();
+            {
+                value = ReadQuotedString();
+                return true;
+            }
 
             if (char.IsDigit(currentChar) || currentChar == '-')
-                return ReadNumber();
+            {
+                value = ReadNumber();
+                return true;
+            }
 
             bool booleanValue;
             if (TryReadBoolean(out booleanValue))
-                return booleanValue;
+            {
+                value = booleanValue;
+                return true;
+            }
 
             if (TryReadNull())
-                return null;
+            {
+                value = null;
+                return true;
+            }
 
-            return ReadTextUntil(',', ';');
+            if (allowNonQuotedText == AllowNonQuotedText.Allow)
+            {
+                value = ReadTextUntil(',', ';');
+                return true;
+            }
+
+            value = null;
+            return false;
         }
 
         protected bool TryReadNull()
@@ -381,6 +414,25 @@ namespace Cirrious.CrossCore.Parse
             {
                 throw exception.MvxWrap("Problem parsing {0} from {1} in {2}", enumerationType.Name, name, FullText);
             }
+        }
+
+        protected string ReadTextUntilWhitespaceOr(params char[] terminatingCharacters)
+        {
+            var toReturn = new StringBuilder();
+
+            while (!IsComplete)
+            {
+                var currentChar = CurrentChar;
+                if (terminatingCharacters.Contains(currentChar) 
+                    || char.IsWhiteSpace(currentChar))
+                {
+                    break;
+                }
+                toReturn.Append(currentChar);
+                MoveNext();
+            }
+
+            return toReturn.ToString();
         }
 
         protected string ReadTextUntil(params char[] terminatingCharacters)

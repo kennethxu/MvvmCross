@@ -5,8 +5,8 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
-using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore;
+using Cirrious.CrossCore.Exceptions;
 
 namespace Cirrious.MvvmCross.ViewModels
 {
@@ -44,7 +44,7 @@ namespace Cirrious.MvvmCross.ViewModels
             if (!viewModelLocator.TryLoad(request.ViewModelType, parameterValues, savedState, out viewModel))
             {
                 throw new MvxException(
-                    "Failed to load ViewModel for type {0} from locator {1}",
+                    "Failed to construct and initialise ViewModel for type {0} from locator {1} - check MvxTrace for more information",
                     request.ViewModelType, viewModelLocator.GetType().Name);
             }
 

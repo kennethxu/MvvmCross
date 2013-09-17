@@ -5,13 +5,15 @@
 // 
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
+using Cirrious.CrossCore;
 using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore.Exceptions;
-using Cirrious.CrossCore;
 using Cirrious.MvvmCross.Binding.Binders;
 using Cirrious.MvvmCross.Binding.BindingContext;
 using Cirrious.MvvmCross.Binding.Bindings.Source.Construction;
+using Cirrious.MvvmCross.Binding.Bindings.SourceSteps;
 using Cirrious.MvvmCross.Binding.Bindings.Target.Construction;
+using Cirrious.MvvmCross.Binding.Combiners;
 using Cirrious.MvvmCross.Binding.ExpressionParse;
 using Cirrious.MvvmCross.Binding.Parse.Binding.Lang;
 
@@ -33,6 +35,8 @@ namespace Cirrious.MvvmCross.Binding
             return instance;
         }
 
+        private IMvxAutoValueConverters _autoValueConverters;
+        private IMvxBindingDescriptionParser _bindingDescriptionParser;
         private IMvxSourceBindingFactory _sourceBindingFactory;
         private IMvxTargetBindingFactory _targetBindingFactory;
         private IMvxLanguageBindingParser _languageParser;
@@ -40,6 +44,26 @@ namespace Cirrious.MvvmCross.Binding
         private IMvxValueConverterLookup _valueConverterLookup;
         private IMvxBindingNameLookup _defaultBindingName;
         private IMvxBinder _binder;
+        private IMvxSourceStepFactory _sourceStepFactory;
+        private IMvxValueCombinerLookup _valueCombinerLookup;
+
+        public IMvxAutoValueConverters AutoValueConverters
+        {
+            get
+            {
+                _autoValueConverters = _autoValueConverters ?? Mvx.Resolve<IMvxAutoValueConverters>();
+                return _autoValueConverters;
+            }
+        }
+
+        public IMvxBindingDescriptionParser BindingDescriptionParser
+        {
+            get
+            {
+                _bindingDescriptionParser = _bindingDescriptionParser ?? Mvx.Resolve<IMvxBindingDescriptionParser>();
+                return _bindingDescriptionParser;
+            }
+        }
 
         public IMvxLanguageBindingParser LanguageParser
         {
@@ -65,6 +89,15 @@ namespace Cirrious.MvvmCross.Binding
             {
                 _valueConverterLookup = _valueConverterLookup ?? Mvx.Resolve<IMvxValueConverterLookup>();
                 return _valueConverterLookup;
+            }
+        }
+
+        public IMvxValueCombinerLookup ValueCombinerLookup
+        {
+            get
+            {
+                _valueCombinerLookup = _valueCombinerLookup ?? Mvx.Resolve<IMvxValueCombinerLookup>();
+                return _valueCombinerLookup;
             }
         }
 
@@ -101,6 +134,15 @@ namespace Cirrious.MvvmCross.Binding
             {
                 _targetBindingFactory = _targetBindingFactory ?? Mvx.Resolve<IMvxTargetBindingFactory>();
                 return _targetBindingFactory;
+            }
+        }
+
+        public IMvxSourceStepFactory SourceStepFactory
+        {
+            get
+            {
+                _sourceStepFactory = _sourceStepFactory ?? Mvx.Resolve<IMvxSourceStepFactory>();
+                return _sourceStepFactory;
             }
         }
     }

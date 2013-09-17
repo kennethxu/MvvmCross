@@ -9,6 +9,7 @@ using System;
 using Cirrious.CrossCore.Touch.Views;
 using Cirrious.MvvmCross.Binding.BindingContext;
 using Cirrious.MvvmCross.ViewModels;
+using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 
 namespace Cirrious.MvvmCross.Touch.Views
@@ -29,6 +30,12 @@ namespace Cirrious.MvvmCross.Touch.Views
             this.AdaptForBinding();
         }
 
+        protected MvxCollectionViewController(string nibName, NSBundle bundle)
+            : base(nibName, bundle)
+        {
+            this.AdaptForBinding();
+        }
+
         public object DataContext
         {
             get { return BindingContext.DataContext; }
@@ -37,7 +44,7 @@ namespace Cirrious.MvvmCross.Touch.Views
 
         public IMvxViewModel ViewModel
         {
-            get { return (IMvxViewModel) DataContext; }
+			get { return DataContext as IMvxViewModel; }
             set { DataContext = value; }
         }
 

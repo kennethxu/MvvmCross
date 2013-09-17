@@ -1,4 +1,4 @@
-// MvxFluentBindingDescription.cs
+// MvxFluentBindingDescriptionSet.cs
 // (c) Copyright Cirrious Ltd. http://www.cirrious.com
 // MvvmCross is licensed using Microsoft Public License (Ms-PL)
 // Contributions and inspirations noted in readme.md and license.txt
@@ -7,11 +7,12 @@
 
 using System.Collections.Generic;
 using Cirrious.CrossCore.Core;
+using Cirrious.MvvmCross.Binding.Bindings;
 
 namespace Cirrious.MvvmCross.Binding.BindingContext
 {
     public class MvxFluentBindingDescriptionSet<TOwningTarget, TSource>
-        : IMvxApplicable
+        : MvxApplicable
         where TOwningTarget : class, IMvxBindingContextOwner
     {
         private readonly List<IMvxApplicable> _applicables = new List<IMvxApplicable>();
@@ -24,23 +25,44 @@ namespace Cirrious.MvvmCross.Binding.BindingContext
 
         public MvxFluentBindingDescription<TOwningTarget, TSource> Bind()
         {
-            var toReturn = new MvxFluentBindingDescription<TOwningTarget, TSource>(_bindingContextOwner, _bindingContextOwner);
+            var toReturn = new MvxFluentBindingDescription<TOwningTarget, TSource>(_bindingContextOwner,
+                                                                                   _bindingContextOwner);
             _applicables.Add(toReturn);
             return toReturn;
         }
 
         public MvxFluentBindingDescription<TChildTarget, TSource> Bind<TChildTarget>(TChildTarget childTarget)
-            where TChildTarget : class 
+            where TChildTarget : class
         {
             var toReturn = new MvxFluentBindingDescription<TChildTarget, TSource>(_bindingContextOwner, childTarget);
             _applicables.Add(toReturn);
             return toReturn;
         }
 
-        public void Apply()
+        public MvxFluentBindingDescription<TChildTarget, TSource> Bind<TChildTarget>(TChildTarget childTarget,
+                                                                                     string bindingDescription)
+            where TChildTarget : class
+        {
+            var toReturn = Bind(childTarget);
+            toReturn.Described(bindingDescription);
+            return toReturn;
+        }
+
+        public MvxFluentBindingDescription<TChildTarget, TSource> Bind<TChildTarget>(TChildTarget childTarget,
+                                                                                     MvxBindingDescription
+                                                                                         bindingDescription)
+            where TChildTarget : class
+        {
+            var toReturn = Bind(childTarget);
+            toReturn.Described(bindingDescription);
+            return toReturn;
+        }
+
+        public override void Apply()
         {
             foreach (var applicable in _applicables)
                 applicable.Apply();
+            base.Apply();
         }
     }
 }

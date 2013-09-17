@@ -17,12 +17,10 @@ namespace Cirrious.MvvmCross.Console.Platform
 {
     public abstract class MvxConsoleSetup
         : MvxSetup
-
     {
-        protected override void InitializeDebugServices()
+        protected override IMvxTrace CreateDebugTrace()
         {
-            Mvx.RegisterSingleton<IMvxTrace>(new MvxDebugTrace());
-            base.InitializeDebugServices();
+            return new MvxDebugTrace();
         }
 
         public virtual void InitializeMessagePump()
@@ -56,7 +54,8 @@ namespace Cirrious.MvvmCross.Console.Platform
 
         protected override IMvxPluginManager CreatePluginManager()
         {
-            return new MvxConsolePluginManager();
+            // Console is 'full .net' - so uses the same plugins as Wpf
+            return new MvxFilePluginManager(".Wpf", string.Empty);
         }
     }
 }

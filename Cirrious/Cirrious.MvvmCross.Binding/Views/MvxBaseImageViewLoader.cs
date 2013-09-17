@@ -6,10 +6,10 @@
 // Project Lead - Stuart Lodge, @slodge, me@slodge.com
 
 using System;
-using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore;
+using Cirrious.CrossCore.Core;
 using Cirrious.CrossCore.Platform;
-using Cirrious.MvvmCross.Binding.ExtensionMethods;
+using Cirrious.CrossCore.WeakSubscription;
 
 namespace Cirrious.MvvmCross.Binding.Views
 {
@@ -45,7 +45,8 @@ namespace Cirrious.MvvmCross.Binding.Views
             GC.SuppressFinalize(this);
         }
 
-        private void ImageHelperOnImageChanged(object sender, MvxValueEventArgs<TImage> mvxValueEventArgs)
+        // Note - this is public because we use it in weak referenced situations
+        public virtual void ImageHelperOnImageChanged(object sender, MvxValueEventArgs<TImage> mvxValueEventArgs)
         {
             _imageSetAction(mvxValueEventArgs.Value);
         }

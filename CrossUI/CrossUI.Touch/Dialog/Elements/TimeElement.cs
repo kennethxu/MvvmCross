@@ -13,18 +13,14 @@ namespace CrossUI.Touch.Dialog.Elements
     public class TimeElement : DateTimeElement
     {
         public TimeElement()
-            : base("", DateTime.Now)
+            : base("", null)
         {
         }
 
-        public TimeElement(string caption, DateTime date)
+        public TimeElement(string caption, DateTime? date)
             : base(caption, date)
         {
-        }
-
-        public override string FormatDate(DateTime dt)
-        {
-            return dt.ToLocalTime().ToShortTimeString();
+            DateTimeFormat = "t";
         }
 
         public override UIDatePicker CreatePicker()

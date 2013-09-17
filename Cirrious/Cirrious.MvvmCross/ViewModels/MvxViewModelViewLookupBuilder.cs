@@ -9,8 +9,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Cirrious.CrossCore.Exceptions;
 using Cirrious.CrossCore;
+using Cirrious.CrossCore.Exceptions;
+using Cirrious.CrossCore.IoC;
 
 namespace Cirrious.MvvmCross.ViewModels
 {
@@ -22,7 +23,7 @@ namespace Cirrious.MvvmCross.ViewModels
             var associatedTypeFinder = Mvx.Resolve<IMvxViewModelTypeFinder>();
 
             var views = from assembly in sourceAssemblies
-                        from candidateViewType in assembly.GetTypes()
+                        from candidateViewType in assembly.ExceptionSafeGetTypes()
                         let viewModelType = associatedTypeFinder.FindTypeOrNull(candidateViewType)
                         where viewModelType != null
                         select new KeyValuePair<Type, Type>(viewModelType, candidateViewType);
@@ -43,9 +44,10 @@ namespace Cirrious.MvvmCross.ViewModels
             var overSizedCounts = views.GroupBy(x => x.Key)
                                        .Select(x => new {x.Key.Name, Count = x.Count()})
                                        .Where(x => x.Count > 1)
-                                       .ToList();
+                                       .Select(x => string.Format("{0}*{1}", x.Count, x.Name))
+                                       .ToArray();
 
-            if (overSizedCounts.Count == 0)
+            if (overSizedCounts.Length == 0)
             {
                 // no idea what the error is - so throw the original
                 return exception.MvxWrap("Unknown problem in ViewModelViewLookup construction");

@@ -17,8 +17,7 @@ namespace Cirrious.MvvmCross.Droid.Views
 {
     public class MvxAndroidViewsContainer
         : MvxViewsContainer
-          , IMvxAndroidViewModelLoader
-          , IMvxAndroidViewModelRequestTranslator
+         , IMvxAndroidViewsContainer
     {
         private const string ExtrasKey = "MvxLaunchData";
         private const string SubViewModelKey = "MvxSubViewModelKey";
@@ -34,7 +33,7 @@ namespace Cirrious.MvvmCross.Droid.Views
 
         public virtual IMvxViewModel Load(Intent intent, IMvxBundle savedState)
         {
-            return Load(intent, null);
+            return Load(intent, null, null);
         }
 
         public virtual IMvxViewModel Load(Intent intent, IMvxBundle savedState, Type viewModelTypeHint)
@@ -48,17 +47,13 @@ namespace Cirrious.MvvmCross.Droid.Views
             if (intent.Action == Intent.ActionMain)
             {
                 MvxTrace.Trace("Creating ViewModel for ActionMain");
-                var loaderService = Mvx.Resolve<IMvxViewModelLoader>();
-                var viewModelRequest = MvxViewModelRequest.GetDefaultRequest(viewModelTypeHint);
-                var viewModel = loaderService.LoadViewModel(viewModelRequest, savedState);
-                return viewModel;
+                return DirectLoad(savedState, viewModelTypeHint);
             }
 
             if (intent.Extras == null)
             {
-                MvxTrace.Error(
-                               "Null Extras seen on Intent when creating ViewModel - this should not happen - have you tried to navigate to an MvvmCross View directly?");
-                return null;
+                MvxTrace.Trace("Null Extras seen on Intent when creating ViewModel - have you tried to navigate to an MvvmCross View directly? Will try direct load");
+                return DirectLoad(savedState, viewModelTypeHint);
             }
 
             IMvxViewModel mvxViewModel;
@@ -72,7 +67,21 @@ namespace Cirrious.MvvmCross.Droid.Views
             return CreateViewModelFromIntent(intent, savedState);
         }
 
-        private IMvxViewModel CreateViewModelFromIntent(Intent intent, IMvxBundle savedState)
+        protected virtual IMvxViewModel DirectLoad(IMvxBundle savedState, Type viewModelTypeHint)
+        {
+            if (viewModelTypeHint == null)
+            {
+                Mvx.Error("Unable to load viewmodel - no type hint provided");
+                return null;
+            }
+
+            var loaderService = Mvx.Resolve<IMvxViewModelLoader>();
+            var viewModelRequest = MvxViewModelRequest.GetDefaultRequest(viewModelTypeHint);
+            var viewModel = loaderService.LoadViewModel(viewModelRequest, savedState);
+            return viewModel;
+        }
+
+        protected virtual IMvxViewModel CreateViewModelFromIntent(Intent intent, IMvxBundle savedState)
         {
             var extraData = intent.Extras.GetString(ExtrasKey);
             if (extraData == null)
@@ -84,14 +93,14 @@ namespace Cirrious.MvvmCross.Droid.Views
             return ViewModelFromRequest(viewModelRequest, savedState);
         }
 
-        private IMvxViewModel ViewModelFromRequest(MvxViewModelRequest viewModelRequest, IMvxBundle savedState)
+        protected virtual IMvxViewModel ViewModelFromRequest(MvxViewModelRequest viewModelRequest, IMvxBundle savedState)
         {
             var loaderService = Mvx.Resolve<IMvxViewModelLoader>();
             var viewModel = loaderService.LoadViewModel(viewModelRequest, savedState);
             return viewModel;
         }
 
-        private bool TryGetEmbeddedViewModel(Intent intent, out IMvxViewModel mvxViewModel)
+        protected virtual bool TryGetEmbeddedViewModel(Intent intent, out IMvxViewModel mvxViewModel)
         {
             var embeddedViewModelKey = intent.Extras.GetInt(SubViewModelKey);
             if (embeddedViewModelKey != 0)
@@ -121,12 +130,13 @@ namespace Cirrious.MvvmCross.Droid.Views
 
             AdjustIntentForPresentation(intent, request);
 
-            intent.AddFlags(ActivityFlags.NewTask);
             return intent;
         }
 
         protected virtual void AdjustIntentForPresentation(Intent intent, MvxViewModelRequest request)
         {
+            intent.AddFlags(ActivityFlags.NewTask);
+
 #warning we want to do things here... clear top, remove history item, etc
 //#warning ClearTop is not enough :/ Need to work on an Intent based scheme like http://stackoverflow.com/questions/3007998/on-logout-clear-activity-history-stack-preventing-back-button-from-opening-l
 //            if (request.ClearTop)

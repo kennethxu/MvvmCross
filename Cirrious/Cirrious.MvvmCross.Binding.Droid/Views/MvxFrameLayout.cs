@@ -20,12 +20,19 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
           , IMvxWithChangeAdapter
     {
         public MvxFrameLayout(Context context, IAttributeSet attrs)
+            : this(context, attrs, new MvxAdapterWithChangedEvent(context))
+        {
+        }
+
+        public MvxFrameLayout(Context context, IAttributeSet attrs, IMvxAdapterWithChangedEvent adapter)
             : base(context, attrs)
         {
             var itemTemplateId = MvxAttributeHelpers.ReadListItemTemplateId(context, attrs);
-            Adapter = new MvxAdapterWithChangedEvent(context);
-            Adapter.ItemTemplateId = itemTemplateId;
-            Adapter.DataSetChanged += AdapterOnDataSetChanged;
+            if (adapter != null)
+            {
+                Adapter = adapter;
+                Adapter.ItemTemplateId = itemTemplateId;
+            }
             this.ChildViewRemoved += OnChildViewRemoved;
         }
 
@@ -43,12 +50,12 @@ namespace Cirrious.MvvmCross.Binding.Droid.Views
             }
         }
 
-        private MvxAdapterWithChangedEvent _adapter;
+        private IMvxAdapterWithChangedEvent _adapter;
 
-        public MvxAdapterWithChangedEvent Adapter
+        public IMvxAdapterWithChangedEvent Adapter
         {
             get { return _adapter; }
-            set
+            protected set
             {
                 var existing = _adapter;
                 if (existing == value)

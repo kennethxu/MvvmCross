@@ -8,8 +8,8 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using Cirrious.MvvmCross.Binding.Binders;
 using Cirrious.MvvmCross.Binding.BindingContext;
+using Cirrious.MvvmCross.Binding.Bindings;
 using MonoTouch.UIKit;
 
 namespace Cirrious.MvvmCross.Binding.Touch.Views
@@ -25,10 +25,22 @@ namespace Cirrious.MvvmCross.Binding.Touch.Views
             this.CreateBindingContext(bindingText);
         }
 
+		public MvxCollectionViewCell(IntPtr handle)
+			: base(handle)
+		{
+            this.CreateBindingContext();
+        }
+
         public MvxCollectionViewCell(string bindingText, IntPtr handle)
             : base(handle)
         {
             this.CreateBindingContext(bindingText);
+        }
+
+		public MvxCollectionViewCell(RectangleF frame)
+			: base(frame)
+		{
+            this.CreateBindingContext();
         }
 
         public MvxCollectionViewCell(string bindingText, RectangleF frame)
